@@ -33,8 +33,10 @@ def k_nearest_neighbors(X_train, y_train, x_test, k):
     return prediction
 
 image_folder_path = 'datasets/training_data'
+test_folder_path = 'datasets/real_testing_data'
 
 X, y = load_images_from_folder(image_folder_path)
+X_test, y_test = load_images_from_folder(test_folder_path)
 k_value = 41
 
 tp = 0  
@@ -42,9 +44,9 @@ fp = 0
 tn = 0
 fn = 0 
 
-for i in range(len(X)):
-    test_example = X[i]
-    true_label = y[i]
+for i in range(len(X_test)):
+    test_example = X_test[i]
+    true_label = y_test[i]
     prediction = k_nearest_neighbors(X, y, test_example, k_value)
 
     if prediction == true_label:
@@ -60,9 +62,9 @@ for i in range(len(X)):
 
 accuracy = (tp + tn) / (tp + tn + fp + fn)
 precision = tp / (tp + fp) 
-recall = tp / (tp + fn) 
+
 print(tp, fp, tn, fn)
 print(f'Accuracy: {accuracy:.2f}')
 print(f'Precision: {precision:.2f}')
-print(f'Recall: {recall:.2f}')
+
 
